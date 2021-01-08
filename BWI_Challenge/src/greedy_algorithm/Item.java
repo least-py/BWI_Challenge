@@ -27,6 +27,7 @@ public class Item {
 	    return (item.name.equals(this.name) && item.weight == this.weight && item.value == this.value); 
 	     
 	 }
+	 
 
 	public int getWeight() {
 		return weight;
@@ -51,6 +52,8 @@ public class Item {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	
 
 
 }

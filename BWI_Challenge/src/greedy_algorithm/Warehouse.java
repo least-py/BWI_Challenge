@@ -9,12 +9,6 @@ public class Warehouse {
 	//Names of the items which are no longer in the stock after filling the truck
 	//private ArrayList <Item> removed_items = new ArrayList <Item>();
 	
-	/**
-	 * Constructor will only define the {@link #order_list}. Initialization has to be done via {@link #add_orders(ArrayList)}
-	 */
-	public Warehouse() {
-		this.setOrder_list(new ArrayList <CargoPair>());
-	}
 	
 	/**
 	 * Constructor will initialize the {@link #order_list} sorted by priority.

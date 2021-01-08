@@ -1,6 +1,8 @@
 package greedy_algorithm;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Coordination {
 	
@@ -16,8 +18,6 @@ public class Coordination {
 		Truck fst_truck = new Truck(fst_drivers_weight, truck_capacity);
 		Truck snd_truck = new Truck(snd_drivers_weight, truck_capacity);
 		
-		//print_cargo(warehouse.getOrder_list());
-		
 		fill_truck(warehouse, fst_truck);
 		
 		print_cargo(fst_truck.getCargo());
@@ -28,14 +28,57 @@ public class Coordination {
 		
 		print_cargo(snd_truck.getCargo());
 		
+		change_last_piece(warehouse, snd_truck);
+		
 		System.out.println("space left");
 		System.out.println(fst_truck.getRemaining_space());
 		System.out.println(snd_truck.getRemaining_space());
 
 	}
 	
+	public static void change_last_piece(Warehouse warehouse, Truck truck) {
+		ArrayList <CargoPair> cargo = truck.getCargo(); 
+		Item last_item = cargo.get(cargo.size()-1).item;
+		int alternative_size = (int) (truck.getRemaining_space() + last_item.getWeight());
+		int items_value = last_item.getValue();
+		
+	
+		ArrayList <Item> order_list = new ArrayList <Item>();
+		
+		//extract the items of higher value than the 'last item'
+		for( CargoPair pair : warehouse.getOrder_list()) {
+			if (pair.item.getValue() > items_value) {
+				order_list.add(pair.item);
+			}
+		}
+		//sort Items by value
+		Collections.sort(order_list, new Comparator<Item>() {
+			@Override
+			  public int compare(Item i1, Item i2) {
+			    return ((Integer)i2.getValue()).compareTo((Integer)i1.getValue());
+			  }
+		});
+		
+		//sorted by value (descending)
+		for(Item i : order_list) {
+			if(i.getWeight() <= alternative_size) {
+				CargoPair pair = cargo.get(cargo.size()-1);
+				pair.amount = pair.amount - 1;
+				cargo.add(new CargoPair(i, 1));
+				break;
+			}
+		}
+		
+		
+		
+	}
 	
 	
+	/**
+	 * Fill a given truck with the available items in the warehouse regarding the priority and weight of the items.
+	 * @param warehouse
+	 * @param truck
+	 */
 	public static void fill_truck(Warehouse warehouse, Truck truck) {
 		
 		for(CargoPair order : warehouse.getOrder_list()) {
@@ -60,7 +103,7 @@ public class Coordination {
 	}
 	
 	/**
-	 * 
+	 * it determines how many units of the given item would fit in the truck without checking the actual quantity available.
 	 * @param item
 	 * @return
 	 */

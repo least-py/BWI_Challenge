@@ -26,7 +26,7 @@ public class Truck {
 	
 	
 	/**
-	 * 
+	 * Adding the given pair to {@link #cargo} and updating the remaining space in the truck.
 	 * @param pair hardware item and its amount in the cargo
 	 */
 	public void load_Pair(CargoPair pair) {
