@@ -51,3 +51,5 @@ loaded value in second truck: 29881
 remaining space in the first truck: 36.0
 remaining space in the second truck: 160.0
 ```
+
+Picture from: <a href="https://pixabay.com/de/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3814429">Gerd Altmann</a> auf <a href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3814429">Pixabay</a>
