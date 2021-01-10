@@ -11,8 +11,21 @@ These instructions will get you a copy of the project up and running on your loc
 JDK and JRE have to be installed.
 
 ### Installing
+for Windows:
 
+- Download the .zip file and unzip it at your current directoty (Use the path where the unzipped folder was placed. In the following referred as an example: _C:\Users\username\Downloads_)
 
+- Now open cmd:
+
+``` cd C:\Users\username\Downloads\BWI_Challenge-master\BWI_Challenge-master\BWI_Challenge\src\greedy_algorithm ```
+
+``` javac *.java ```
+
+``` cd .. ```
+
+``` java greedy_algorithm.Coordination ```
+
+Now the program should run and produce the following output inside the console.
 
 ### Console Output
 ```
