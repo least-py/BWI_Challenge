@@ -1,6 +1,6 @@
 # BWI_Challenge
 
-A program to solve the * [BWI Challenge](https://www.get-in-it.de/coding-challenge)
+A program to solve the [BWI Challenge](https://www.get-in-it.de/coding-challenge)
 
 ## Getting Started
 
