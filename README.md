@@ -13,8 +13,9 @@ JDK and JRE have to be installed.
 ### Installing
 
 
-```
+
 ### Console Output
+```
 First Truck:
 Units: 59	Priority: 0.04184100418410042	Item: Mobiltelefon Buero 	Value: 30 	Weight: 717
 Units: 157	Priority: 0.06072874493927125	Item: Mobiltelefon Outdoor 	Value: 60 	Weight: 988
