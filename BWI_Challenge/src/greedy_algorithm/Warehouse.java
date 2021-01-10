@@ -53,6 +53,15 @@ public class Warehouse {
 		cargo_pair.amount = units_to_load;
 	}
 	
+	public Integer find_Index_of_Item(Item item) {
+		for(int i = 0; i < order_list.size(); i++) {
+			if(order_list.get(i).item.equals(item)) {
+				return (Integer)i;
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * Cleaning up the {@link #order_list} with the help of the {@link #removed_items} list. The Names are uniquely!
 	 * The method should be used after filling a truck.

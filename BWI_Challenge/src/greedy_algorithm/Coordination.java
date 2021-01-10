@@ -18,30 +18,43 @@ public class Coordination {
 		Truck fst_truck = new Truck(fst_drivers_weight, truck_capacity);
 		Truck snd_truck = new Truck(snd_drivers_weight, truck_capacity);
 		
+		
+		//------------------------- FIRST TRUCK -------------------------------
 		fill_truck(warehouse, fst_truck);
 		
+		System.out.println("First Truck:");
 		print_cargo(fst_truck.getCargo());
 		
-		System.out.println();
-		
+
+		//------------------------ SECOND TRUCK -------------------------------
 		fill_truck(warehouse, snd_truck);
 		
+		System.out.println("Second Truck:");
 		print_cargo(snd_truck.getCargo());
 		
-		change_last_piece(warehouse, snd_truck);
 		
-		System.out.println("space left");
-		System.out.println(fst_truck.getRemaining_space());
-		System.out.println(snd_truck.getRemaining_space());
+		print_transport_value(fst_truck, snd_truck);
+		
+		System.out.println("remaining space in the first truck: " + fst_truck.getRemaining_space());
+		System.out.println("remaining space in the second truck: " + snd_truck.getRemaining_space());
 
 	}
 	
-	public static void change_last_piece(Warehouse warehouse, Truck truck) {
-		ArrayList <CargoPair> cargo = truck.getCargo(); 
-		Item last_item = cargo.get(cargo.size()-1).item;
+	public static void change_last_item(Warehouse warehouse, Truck truck) {
+		ArrayList <CargoPair> cargo = truck.getCargo();
+		
+		//sort Pairs by their items' weight
+		Collections.sort(cargo, new Comparator<CargoPair>() {
+			@Override
+			 public int compare(CargoPair p1, CargoPair p2) {
+				return ((Integer)(p1.item.getWeight())).compareTo((Integer)(p2.item.getWeight()));
+			  }
+			});
+		
+		Item last_item = cargo.get(0).item; 
+		
 		int alternative_size = (int) (truck.getRemaining_space() + last_item.getWeight());
 		int items_value = last_item.getValue();
-		
 	
 		ArrayList <Item> order_list = new ArrayList <Item>();
 		
@@ -62,17 +75,39 @@ public class Coordination {
 		//sorted by value (descending)
 		for(Item i : order_list) {
 			if(i.getWeight() <= alternative_size) {
-				CargoPair pair = cargo.get(cargo.size()-1);
+				CargoPair pair = cargo.get(0);
 				pair.amount = pair.amount - 1;
-				cargo.add(new CargoPair(i, 1));
+				if(pair.amount == 0) {
+					cargo.remove(0);
+				}
+				
+				//Find index of Pair with given Item in the warehouse
+				Integer index = warehouse.find_Index_of_Item(pair.item);
+				
+				//In this case the item is not available in the warehouse, so it is "readded"
+				if(index == null) {
+					warehouse.getOrder_list().add(new CargoPair(pair.item, 1));
+				}
+				//In this case we update the amount of the item in the warehouse
+				else {
+					int position = Integer.valueOf(index);
+					warehouse.getOrder_list().get(position).amount--;
+				}
+				
+				truck.setRemaining_space(truck.getRemaining_space() + pair.item.getWeight());
+				CargoPair loaded_pair = new CargoPair(i, 1);
+				
+				//load the item into the truck and update its amount in the warehouse
+				truck.load_Pair(loaded_pair);
+				warehouse.extractItem(loaded_pair);
+				
+				warehouse.sort_by_priority();
 				break;
 			}
 		}
-		
-		
-		
 	}
 	
+
 	
 	/**
 	 * Fill a given truck with the available items in the warehouse regarding the priority and weight of the items.
@@ -100,10 +135,12 @@ public class Coordination {
 		}
 		//Now every item was considered to be added to the cargo. 
 		warehouse.clean_up_orders();
+		
+		change_last_item(warehouse, truck);
 	}
 	
 	/**
-	 * it determines how many units of the given item would fit in the truck without checking the actual quantity available.
+	 * It determines how many units of the given item would fit in the truck without checking the actual quantity available.
 	 * @param item
 	 * @return
 	 */
@@ -167,17 +204,38 @@ public class Coordination {
 		return order_list;
 	}
 	
-	
+	/**
+	 * Printing the given cargo
+	 * @param cargo
+	 */
 	public static void print_cargo(ArrayList<CargoPair> cargo) {
 		
 		for(CargoPair pair : cargo) {
-			System.out.println(pair.amount +
-								"  priority: "+ ((double)pair.item.getValue()/(double)pair.item.getWeight())
-							   + "   Hardware: "+
-							   pair.item.getName()+" "+
-							   pair.item.getValue()+" "+
-							   pair.item.getWeight());
+			System.out.println(    "Units: " 
+							   +	 pair.amount +
+								 "	Priority: "
+							   + ((double)pair.item.getValue()/(double)pair.item.getWeight())
+							   + "	Item: "
+							   +	 pair.item.getName()+" "
+							   + "	Value: "
+							   +	 pair.item.getValue()+" "
+							   + "	Weight: "
+							   +	 pair.item.getWeight());
 			
 		}
+		System.out.println("-----------------------------------------------------------------------------------------------------------------");
+	}
+	
+	
+	/**
+	 * Prints the loaded value of the two trucks
+	 * @param fst_truck
+	 * @param snd_truck
+	 */
+	public static void print_transport_value(Truck fst_truck, Truck snd_truck) {
+		System.out.println();
+		System.out.println("loaded value in first truck: " + fst_truck.get_loaded_value());
+		System.out.println("loaded value in second truck: " + snd_truck.get_loaded_value());
+		System.out.println();
 	}
 }

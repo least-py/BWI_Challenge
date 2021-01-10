@@ -12,6 +12,19 @@ public class Truck {
 		this.setCargo(new ArrayList<CargoPair>());
 	}
 	
+	
+	/**
+	 * After the truck is loaded, this method calculates the sum of all values of all items to get the whole transported value.
+	 * @return
+	 */
+	public int get_loaded_value() {
+		int value = 0;
+		for(CargoPair pair : getCargo()) {
+			value = value + (pair.item.getValue()*pair.amount);
+		}
+		return value;
+	}
+	
 	/**
 	 * Checks if the weight of the given item exceeds the remaining space.
 	 * @param item
