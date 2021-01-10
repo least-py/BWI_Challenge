@@ -1,6 +1,7 @@
 # BWI_Challenge
 
-A program to solve the [BWI Challenge](https://www.get-in-it.de/coding-challenge)
+A program to solve the [BWI Challenge](https://www.get-in-it.de/coding-challenge). The aim is to achieve the highest possible utility value. The details of the goods to be transported (utility value, weight, units) are listed here: [Transport details](https://www.get-in-it.de/imgs/it/codingCompetition/bwi/code_for_bwi.pdf). 
+This programme uses a heuristic for the problem that is based on the principle of a greedy algorithm.
 
 ## Getting Started
 
@@ -8,7 +9,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-JDK and JRE have to be installed.
+JavaSE-12 (includes the JDK and JRE)
 
 ### Installing
 for Windows:
