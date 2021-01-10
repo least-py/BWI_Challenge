@@ -13,7 +13,7 @@ JDK and JRE have to be installed.
 ### Installing
 
 
-
+```
 ### Console Output
 First Truck:
 Units: 59	Priority: 0.04184100418410042	Item: Mobiltelefon Buero 	Value: 30 	Weight: 717
@@ -33,3 +33,4 @@ loaded value in second truck: 29881
 
 remaining space in the first truck: 36.0
 remaining space in the second truck: 160.0
+```
