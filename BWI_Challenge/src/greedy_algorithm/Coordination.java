@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * This class Coordinates the loading process of the respective trucks under 
+ * the specifications defined in the Main Method.
+ * @author Lea
+ *
+ */
 public class Coordination {
 	
 	public static void main(String[] args) {
@@ -40,6 +46,11 @@ public class Coordination {
 
 	}
 	
+	/**
+	 * Swaps the last item if the remaining space allows an item of higher value to be stowed.
+	 * @param warehouse
+	 * @param truck
+	 */
 	public static void change_last_item(Warehouse warehouse, Truck truck) {
 		ArrayList <CargoPair> cargo = truck.getCargo();
 		
@@ -142,7 +153,7 @@ public class Coordination {
 	/**
 	 * It determines how many units of the given item would fit in the truck without checking the actual quantity available.
 	 * @param item
-	 * @return
+	 * @return A CargoPair of item and units
 	 */
 	public static CargoPair get_fitting_units(Item item, Warehouse warehouse, Truck truck) {
 		//casting remaining_space from double to integer, so it will be rounded downwards

@@ -2,6 +2,12 @@ package greedy_algorithm;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the truck that will transport the goods to Bonn.
+ * The weight of the driver and the capacity are taken into account here.
+ * @author Lea
+ *
+ */
 public class Truck {
 
 	private double remaining_space;
@@ -15,7 +21,7 @@ public class Truck {
 	
 	/**
 	 * After the truck is loaded, this method calculates the sum of all values of all items to get the whole transported value.
-	 * @return
+	 * @return The loaded value in the truck
 	 */
 	public int get_loaded_value() {
 		int value = 0;
@@ -39,7 +45,7 @@ public class Truck {
 	
 	
 	/**
-	 * Adding the given pair to {@link #cargo} and updating the remaining space in the truck.
+	 * Adding the given pair to #cargo and updating the remaining space in the truck.
 	 * @param pair hardware item and its amount in the cargo
 	 */
 	public void load_Pair(CargoPair pair) {

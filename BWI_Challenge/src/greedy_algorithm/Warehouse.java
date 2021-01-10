@@ -3,15 +3,19 @@ package greedy_algorithm;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * This class represents a warehouse where the given hardware goods are stored.
+ * The quantity ordered can be read from the order_list.
+ * @author Lea
+ *
+ */
 public class Warehouse {
 	
 	private ArrayList <CargoPair> order_list;
-	//Names of the items which are no longer in the stock after filling the truck
-	//private ArrayList <Item> removed_items = new ArrayList <Item>();
 	
 	
 	/**
-	 * Constructor will initialize the {@link #order_list} sorted by priority.
+	 * Constructor will initialize the order_list sorted by priority.
 	 * @param order_list
 	 */
 	public Warehouse(ArrayList <CargoPair> order_list) {
@@ -20,9 +24,9 @@ public class Warehouse {
 	}
 	
 	/**
-	 * Updating the order quantity in the {@link #order_list} to load a certain amount of an item type.
+	 * Updating the order quantity in the order_list to load a certain amount of an item type.
 	 * The method compares the quantity to be loaded with the available quantity and updates the load if necessary.
-	 * If the entire amount of an item type has been loaded, its index will be added to the {@link #removed_items} list.
+	 * If the entire amount of an item type has been loaded, its index will be added to the #removed_items list.
 	 * @param pair item to load and its updated amount
 	 */
 	public void extractItem(CargoPair cargo_pair) {
@@ -53,6 +57,11 @@ public class Warehouse {
 		cargo_pair.amount = units_to_load;
 	}
 	
+	/**
+	 *	
+	 * @param item
+	 * @return The Index of the CargoPair in the warehouse. If the CargoPair is no longer available, the method returns null.
+	 */
 	public Integer find_Index_of_Item(Item item) {
 		for(int i = 0; i < order_list.size(); i++) {
 			if(order_list.get(i).item.equals(item)) {
@@ -63,7 +72,7 @@ public class Warehouse {
 	}
 	
 	/**
-	 * Cleaning up the {@link #order_list} with the help of the {@link #removed_items} list. The Names are uniquely!
+	 * Cleaning up the {@link #order_list} with the help of the removed_items list. The names are uniquely!
 	 * The method should be used after filling a truck.
 	 */
 	public void clean_up_orders() {
@@ -72,7 +81,7 @@ public class Warehouse {
 	
 	/**
 	 * The given orders won't be inserted by priority. 
-	 * The method will only concatenate the ArrayList with the already existing {@link #order_list}
+	 * The method will only concatenate the ArrayList with the already existing order_list.
 	 * @param new_orders
 	 */
 	public void add_orders(ArrayList <CargoPair> new_orders) {

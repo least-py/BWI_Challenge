@@ -1,5 +1,11 @@
 package greedy_algorithm;
 
+/**
+ * This class models the hardware parts that are needed.
+ * The commodity is composed of the attributes name, weight and (utility-)value.
+ * @author Lea
+ *
+ */
 public class Item {
 	
 	private String name;

@@ -1,5 +1,11 @@
 package greedy_algorithm;
 
+/**
+ * This class models a (hardware, units) - pair. 
+ * This is to make it easier to store the ordered quantity of an item or the stowed quantity of an item in an array.
+ * @author Lea
+ *
+ */
 public class CargoPair implements Comparable<CargoPair>{
 	
 	public final Item item;
@@ -11,7 +17,7 @@ public class CargoPair implements Comparable<CargoPair>{
 	}
 	
 	/**
-	 * @return the total weight resulting from the quantity and the weight of the item.
+	 * @return The total weight resulting from the quantity and the weight of the item.
 	 */
 	public int loading_weight() {
 		return this.item.getWeight() * amount;
